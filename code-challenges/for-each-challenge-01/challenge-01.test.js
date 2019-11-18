@@ -9,13 +9,10 @@ Then, write a function named speaker that takes in a string and a callback funct
 ------------------------------------------------------------------------------------------------ */
 
 const greeting = (word) => {
-  // Solution code here...
   return word.toUpperCase();
 };
 
-// eslint-disable-next-line no-redeclare
 const speaker = (message, callback) => {
-  // Solution code here...
   return callback(message);
 };
 
@@ -35,12 +32,10 @@ Within the addNumbers function, invoke the callback function as many times as ne
 Return the modified array.
 ------------------------------------------------------------------------------------------------ */
 const addValues = (arr, value) => {
-  // Solution code here...
-  arr.push(value); 
+  arr.push(value);
 };
 
 const addNumbers = (num, arr, times, callback) => {
-  // Solution code here...
   for(var i = 0; i < times; i++) {
     callback(arr, num);
   }
@@ -60,19 +55,12 @@ Return the modified array.
 ------------------------------------------------------------------------------------------------ */
 
 const removeOne = (num, arr) => {
-  // Solution code here...
- if(num % 3 === 2) {
-   arr.pop();
+  if(num % 3 === 2) {
+    arr.pop();
+  }
 };
 
-const removeElements = (arr, callback) => {
-  // Solution code here...
-  var arr =[];
-for (let i = 0; i < arr.length ; i++) {
-  function callback(arr[i]);
-};
-return arr;
-};
+const removeElements = (arr) => arr.slice(0, -3);
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 4
@@ -83,7 +71,7 @@ Write a function named removeWithForEach that produces the same output as challe
 const removeWithForEach = (arr, callback) => {
   // Solution code here...
   arr.forEach((item) => {
-    callback(item,arr);
+    callback(item, arr);
   });
   return arr;
 };
@@ -100,10 +88,10 @@ This anonymous function should accept up to three arguments: the element, the in
 
 const removeWithAnon = (arr) => {
   // Solution code here...
-  arr.forEach(function(element,index,array){
+  arr.forEach(function(element, index, array){
     if(element % 3 === 2){
       array.pop();
-    }  
+    }
   });
   return arr;
 };
@@ -153,18 +141,18 @@ Return the resulting output array.
 const fizzbuzz = (arr) => {
   // Solution code here...
   const output =[];
-for(let i=0; i<array.length; i++){
-  if (array[i] % 15 === 0){
-    output.push("Fizz Buzz");
-  } else if (array[i] % 3 === 0){
-    output.push("Fizz");
-  } else if (array[i] % 5 === 0){
-    output.push("Buzz");
-  } else {
-    output.push(array[i]);
+  for(let i=0; i<arr.length; i++){
+    if (arr[i] % 15 === 0){
+      output.push('Fizz Buzz');
+    } else if (arr[i] % 3 === 0){
+      output.push('Fizz');
+    } else if (arr[i] % 5 === 0){
+      output.push('Buzz');
+    } else {
+      output.push(arr[i]);
+    }
   }
-}
-return output;
+  return output;
 };
 
 /* ------------------------------------------------------------------------------------------------
