@@ -1,7 +1,5 @@
 'use strict';
 
-import { objectExpression } from "@babel/types";
-
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 1
 
@@ -14,10 +12,7 @@ const courseInfo = { name: 'Code 301', duration: { dayTrack: '4 weeks', eveningT
   finalExam: true
 };
 
-const getCourseKeys = (obj) => {
-  // Solution code here...
-  Object.keys(courseInfo);
-};
+const getCourseKeys = (obj) => Object.keys(courseInfo);
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 2
@@ -71,12 +66,15 @@ let characters = [
   }
 ];
 
+
 const getHouses = (arr) => {
   let houses = [];
-  // Solution code here...
-  Object.values(house);
+  Object.values(arr).forEach( character => {
+    houses.push(character.house);
+  });
   return houses;
 };
+
 
 /*------------------------------------------------------------------------------------------------
 CHALLENGE 3
@@ -91,8 +89,15 @@ hasChildrenValues(characters, 'Sansa') will return false
 ------------------------------------------------------------------------------------------------ */
 
 const hasChildrenValues = (arr, character) => {
-  // Solution code here...
-
+  let exists = false;
+  let hasChildren = false;
+  arr.forEach(characterObject => {
+    let characterName = Object.values(characterObject.name).join('');
+    if (characterName === character) {
+      hasChildren = (characterObject.children.length > 0);
+      exists = true;
+    }});
+  return (exists && hasChildren);
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -104,8 +109,17 @@ The input and output of this function are the same as the input and output from 
 ------------------------------------------------------------------------------------------------ */
 
 const hasChildrenEntries = (arr, character) => {
-  // Solution code here...
+  let exists = false;
+  let hasChildren = false;
+  arr.forEach( characterObject => {
+    let currentCharacter = Object.entries(characterObject);
+    let characterName = currentCharacter[0][1];
+    if (characterName === character) {
+      hasChildren = currentCharacter[2][1].length > 0;exists = true;
+    }});
+  return (exists &&hasChildren);
 };
+
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 5
@@ -114,7 +128,16 @@ Write a function named totalCharacters that takes in an array and returns the nu
 ------------------------------------------------------------------------------------------------ */
 
 const totalCharacters = (arr) => {
-  // Solution code here...
+  let allEntries = Object.entries(arr);
+  let characters = [];
+  for(let mainCharacterIndex in allEntries) {
+    characters.push(allEntries[mainCharacterIndex][1].name);
+    if (allEntries[mainCharacterIndex][1].spouse !== null && allEntries[mainCharacterIndex][1].spouse !== undefined) {
+      characters.push(allEntries[mainCharacterIndex][1].spouse);
+    }if (allEntries[mainCharacterIndex][1].children !== null && allEntries[mainCharacterIndex][1].children !== undefined) {
+      characters.push(...allEntries[mainCharacterIndex][1].children);
+    }}
+  return characters.length;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -129,7 +152,6 @@ For example: [{ house: 'Stark', members: 7 }, { house: 'Arryn', members: 3 }, ..
 
 const houseSize = (arr) => {
   const sizes = [];
-  // Solution code here...
   return sizes;
 };
 
@@ -153,7 +175,6 @@ const deceasedSpouses = ['Catelyn', 'Lysa', 'Robert', 'Khal Drogo', 'Alerie'];
 
 const houseSurvivors = (arr) => {
   const survivors = [];
-  // Solution code here...
   return survivors;
 };
 
@@ -174,14 +195,14 @@ describe('Testing challenge 1', () => {
   });
 });
 
-xdescribe('Testing challenge 2', () => {
+describe('Testing challenge 2', () => {
   test('It should return an array of the names of the houses', () => {
     expect(getHouses(characters)).toStrictEqual(['Stark', 'Arryn', 'Lannister', 'Targaryen', 'Tyrell', 'Greyjoy', 'Snow']);
     expect(getHouses(characters).length).toStrictEqual(7);
   });
 });
 
-xdescribe('Testing challenge 3', () => {
+describe('Testing challenge 3', () => {
   test('It should return true for characters that have children', () => {
     expect(hasChildrenValues(characters, 'Daenarys')).toBeTruthy();
   });
@@ -191,7 +212,7 @@ xdescribe('Testing challenge 3', () => {
   });
 });
 
-xdescribe('Testing challenge 4', () => {
+describe('Testing challenge 4', () => {
   test('It should return true for characters that have children', () => {
     expect(hasChildrenEntries(characters, 'Eddard')).toBeTruthy();
   });
@@ -201,7 +222,7 @@ xdescribe('Testing challenge 4', () => {
   });
 });
 
-xdescribe('Testing challenge 5', () => {
+describe('Testing challenge 5', () => {
   test('It should return the number of characters in the array', () => {
     expect(totalCharacters(characters)).toStrictEqual(26);
   });
