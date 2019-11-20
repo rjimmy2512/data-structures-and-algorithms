@@ -11,9 +11,10 @@ For example, twoToThe([1,2,3]) returns [2,4,8] because 2 ^ 1 = 2, 2 ^ 2 = 4, and
 ------------------------------------------------------------------------------------------------ */
 
 const forLoopTwoToThe = (arr) => {
-  // Solution code here...
   return arr.map(value => Math.pow(2, value));
 };
+
+
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 2
 
@@ -21,12 +22,12 @@ Write a function named forEachTwoToThe that produces the same output as your for
 ------------------------------------------------------------------------------------------------ */
 
 const forEachTwoToThe = (arr) => {
-  // Solution code here...
-  arr.forEach(function(value) {
-    return Math.pow(2, value);
+  let productArr = [];
+  arr.forEach( value => {
+    productArr.push(Math.pow(2, value));
   });
+  return productArr;
 };
-
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 3
@@ -34,11 +35,8 @@ CHALLENGE 3
 Write a function named mapTwoToThe that produces the same output as your forLoopTwoToThe function from challenge 1 and your forEachTwoToThe function from challenge 2, but uses map instead of a for loop or forEach.
 ------------------------------------------------------------------------------------------------ */
 
-const mapTwoToThe = (arr) => {
-  // Solution code here...
-  return arr.map(value => Math.pow(2, value));
-};
-  
+const mapTwoToThe = (arr) => arr.map(value => Math.pow(2, value));
+
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 4
@@ -50,9 +48,14 @@ Read the MDN documentation on String.charCodeAt() if necessary.
 For example: charCode(['h','i']) returns [104, 105].
 ------------------------------------------------------------------------------------------------ */
 
-const charCode = () => {
-  // Solution code here...
+const charCode = (arr) => {
+  let charCodeArr = [];
+  arr.map( (letter, i) => {
+    charCodeArr.push(arr[i].charCodeAt(0));
+  });
+  return charCodeArr;
 };
+
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 5
@@ -64,9 +67,20 @@ If any element in the array is not a number, the resulting array should have the
 For example: evenOdd([1,2,3]) returns ['odd','even','odd'].
 ------------------------------------------------------------------------------------------------ */
 
-const evenOdd = () => {
-  // Solution code here...
+const evenOdd = (arr) => {
+  let BoolOrNaArr = [];
+  arr.map((n) => {
+    if(n % 2 !== 0) {
+      BoolOrNaArr.push('odd');
+    } if(n % 2 === 0) {
+      BoolOrNaArr.push('even');
+    } if (Number.isNaN(n)) {
+      BoolOrNaArr.push('N/A');
+    }
+  });
+  return BoolOrNaArr;
 };
+
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 6
@@ -110,9 +124,15 @@ const snorlaxAbilities = {
   weight: 4600,
 };
 
-const extractAbilities = () => {
-  // Solution code here...
+
+const extractAbilities = (arr) => {
+  let abilitiesArr = [];
+  arr.map( abilityObj => {
+    abilitiesArr.push(abilityObj.ability.name);
+  });
+  return abilitiesArr;
 };
+
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 7
@@ -157,9 +177,15 @@ const snorlaxStats = {
   weight: 4600,
 };
 
-const extractStats = () => {
-  // Solution code here...
+
+const extractStats = (arr) => {
+  let statsArr = [];
+  arr.map( statObj => {
+    statsArr.push({'name': statObj.stat.name, 'total': (statObj.effort + statObj.baseStat)});
+  });
+  return statsArr;
 };
+
 
 /* ------------------------------------------------------------------------------------------------
 TESTS
@@ -205,14 +231,14 @@ describe('Testing challenge 3', () => {
   });
 });
 
-xdescribe('Testing challenge 4', () => {
+describe('Testing challenge 4', () => {
   test('It should return an array containing the character code for each letter', () => {
     expect(charCode(['C', 'o', 'd', 'e', '3', '0', '1'])).toStrictEqual([ 67, 111, 100, 101, 51, 48, 49 ]);
     expect(charCode(['C', 'o', 'd', 'e', '3', '0', '1']).length).toStrictEqual(7);
   });
 });
 
-xdescribe('Testing challenge 5', () => {
+describe('Testing challenge 5', () => {
   test('It should return an array containing the keys from an object', () => {
     expect(evenOdd([5, 8, 2, 6, 9, 13, 542, 541])).toStrictEqual([ 'odd', 'even', 'even', 'even', 'odd', 'odd', 'even', 'odd' ]);
     expect(evenOdd([5, 8, 2, 6, 9, 13, 542, 541]).length).toStrictEqual(8);
@@ -234,14 +260,14 @@ xdescribe('Testing challenge 5', () => {
   });
 });
 
-xdescribe('Testing challenge 6', () => {
+describe('Testing challenge 6', () => {
   test('It should return an array containing only the ability names', () => {
     expect(extractAbilities(snorlaxAbilities.abilities)).toStrictEqual(['gluttony', 'cute charm', 'immunity']);
     expect(extractAbilities(snorlaxAbilities.abilities).length).toStrictEqual(3);
   });
 });
 
-xdescribe('Testing challenge 7', () => {
+describe('Testing challenge 7', () => {
   test('It should return an array containing objects with name and total values', () => {
     expect(extractStats(snorlaxStats.stats)).toStrictEqual([
       { name: 'speed', total: 35, },
