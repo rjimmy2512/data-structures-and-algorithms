@@ -117,7 +117,7 @@ const hasChildrenEntries = (arr, character) => {
     if (characterName === character) {
       hasChildren = currentCharacter[2][1].length > 0;exists = true;
     }});
-  return (exists &&hasChildren);
+  return (exists && hasChildren);
 };
 
 
