@@ -35,30 +35,8 @@ For example, 'abcdefg' returns 'bdf'
 
 const onlyOddChars = (str) => {
   const arr = str.split('');
-  // const filtered = arr.filter(...);
-  // function(element, index){...}
-  // const filtered = arr.filter(function(element, index){...});
-
-  // solution 1
-  // const filtered = arr.filter(function (element, index) {
-  //   return (index % 2 !== 0);
-  // });
-  // return filtered.join('');
-
-  const filtered = arr.filter((element, index) => index % 2 !== 0);
-  return filtered.join('');
-
-  // solution 2
-  // let result = [];
-  // for (var i = 0; i < arr.length; i++) {
-  //   // arr[i] % 2
-  //   // i % 2
-  //   if (i % 2 !== 0) {
-  //     result.push(arr[i]);
-  //   }
-  // }
-
-  // return result.join('');
+  const oddIndex = arr.filter((element, index) => index % 2 !== 0);
+  return oddIndex.join('');
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -68,9 +46,6 @@ Write a function named allHappy that takes in an array of strings and returns a 
 ------------------------------------------------------------------------------------------------ */
 
 const allHappy = (arr) => arr.every(element => element.includes(':)'));
-
-// return arr.every(arr => includes(':)'));
-
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 6
@@ -108,7 +83,8 @@ Return a two-dimensional array with the same roster, but where anyone whose name
 For example, [['Brook Testing', 'Actual Person'], ['Human Person', 'Brook again', 'still Brook']] returns [['Actual Person'], ['Human Person']]
 ------------------------------------------------------------------------------------------------ */
 
-const unenrollBrook = (arr) => arr.map(subarr => subarr.filter(name => !name.includes('Brook')));
+const unenrollBrook = (arr) => arr.map(newArr => newArr.filter(name => !name.includes('Brook')));
+
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 9 - Stretch Goal
@@ -246,7 +222,7 @@ describe('Testing challenge 8', () => {
   });
 });
 
-describe('Testing challenge 9', () => {
+xdescribe('Testing challenge 9', () => {
   test('It should sort events by the day on which they happen', () => {
     const events = ['Dancing on Mondays and Tuesdays', 'Meet the inventors! Monday, August 7', 'in the club on a Tuesday', 'Thursday Night Code', 'Saturday Night Fever'];
     const sortedEvents = sortByDay(events);
@@ -270,7 +246,7 @@ describe('Testing challenge 9', () => {
   });
 });
 
-describe('Testing challenge 10', () => {
+xdescribe('Testing challenge 10', () => {
   test('It should return the ith character of the ith string', () => {
     const words = ['apple', 'banana', 'cantaloupe'];
 
